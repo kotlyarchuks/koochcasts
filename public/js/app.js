@@ -1782,130 +1782,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  computed: {
+    isValidLoginForm: function isValidLoginForm() {
+      return !!(this.isEmailValid() && this.password);
+    }
+  },
+  methods: {
+    isEmailValid: function isEmailValid() {
+      return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+    }
   }
 });
 
@@ -37855,60 +37747,105 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade",
+      staticStyle: { display: "none" },
+      attrs: {
+        id: "loginModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "myModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "loginmodal-container" }, [
+          _c("h1", [_vm._v("Login to Your Account")]),
+          _c("br"),
+          _vm._v(" "),
+          _c("form", [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", name: "user", placeholder: "Username" },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "password",
+                name: "pass",
+                placeholder: "Password"
+              },
+              domProps: { value: _vm.password },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary form-control",
+                attrs: {
+                  type: "submit",
+                  name: "login",
+                  value: "Login",
+                  disabled: !_vm.isValidLoginForm
+                }
+              },
+              [_vm._v("Login")]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        staticStyle: { display: "none" },
-        attrs: {
-          id: "loginModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c("div", { staticClass: "modal-dialog" }, [
-          _c("div", { staticClass: "loginmodal-container" }, [
-            _c("h1", [_vm._v("Login to Your Account")]),
-            _c("br"),
-            _vm._v(" "),
-            _c("form", [
-              _c("input", {
-                attrs: { type: "text", name: "user", placeholder: "Username" }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                attrs: {
-                  type: "password",
-                  name: "pass",
-                  placeholder: "Password"
-                }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "login loginmodal-submit",
-                attrs: { type: "submit", name: "login", value: "Login" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "login-help" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Register")]),
-              _vm._v(" - "),
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Forgot Password")])
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "login-help" }, [
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Register")]),
+      _vm._v(" - "),
+      _c("a", { attrs: { href: "#" } }, [_vm._v("Forgot Password")])
+    ])
   }
 ]
 render._withStripped = true

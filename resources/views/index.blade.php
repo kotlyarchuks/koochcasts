@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Home | Corlate</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>KoochCasts</title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- core CSS -->

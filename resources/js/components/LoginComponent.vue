@@ -4,9 +4,9 @@
             <div class="loginmodal-container">
                 <h1>Login to Your Account</h1><br>
                 <form>
-                    <input type="text" name="user" placeholder="Username">
-                    <input type="password" name="pass" placeholder="Password">
-                    <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+                    <input class="form-control" type="text" name="user" placeholder="Username" v-model="email">
+                    <input class="form-control" type="password" name="pass" placeholder="Password" v-model="password">
+                    <button type="submit" name="login" value="Login" class="btn btn-primary form-control" :disabled="!isValidLoginForm">Login</button>
                 </form>
 
                 <div class="login-help">
@@ -16,6 +16,30 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        data() {
+            return {
+                email: '',
+                password: '',
+            }
+        },
+
+        computed: {
+            isValidLoginForm(){
+                return !!(this.isEmailValid() && this.password);
+            }
+        },
+
+        methods: {
+            isEmailValid()
+            {
+                return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+            }
+        }
+    }
+</script>
 
 <style>
     @import url(https://fonts.googleapis.com/css?family=Roboto);
@@ -137,11 +161,3 @@
         color: #fff;
     }
 </style>
-
-<script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
-</script>
