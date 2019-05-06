@@ -1782,6 +1782,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1797,6 +1802,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     isEmailValid: function isEmailValid() {
       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+    },
+    loginUser: function loginUser() {
+      axios.post('/login', {
+        email: this.email,
+        password: this.password
+      }).then(function (response) {
+        document.location.reload();
+      });
     }
   }
 });
@@ -37824,9 +37837,15 @@ var render = function() {
                   name: "login",
                   value: "Login",
                   disabled: !_vm.isValidLoginForm
+                },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.loginUser()
+                  }
                 }
               },
-              [_vm._v("Login")]
+              [_vm._v("\n                        Login\n                ")]
             )
           ]),
           _vm._v(" "),

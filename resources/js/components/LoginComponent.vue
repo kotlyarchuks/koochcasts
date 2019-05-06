@@ -6,7 +6,12 @@
                 <form>
                     <input class="form-control" type="text" name="user" placeholder="Username" v-model="email">
                     <input class="form-control" type="password" name="pass" placeholder="Password" v-model="password">
-                    <button type="submit" name="login" value="Login" class="btn btn-primary form-control" :disabled="!isValidLoginForm">Login</button>
+                    <button type="submit" name="login" value="Login"
+                            class="btn btn-primary form-control"
+                            :disabled="!isValidLoginForm"
+                            @click.prevent="loginUser()">
+                            Login
+                    </button>
                 </form>
 
                 <div class="login-help">
@@ -36,6 +41,16 @@
             isEmailValid()
             {
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+            },
+
+            loginUser(){
+                axios.post('/login', {
+                    email: this.email,
+                    password: this.password
+                })
+                    .then(function(response){
+                        document.location.reload()
+                    })
             }
         }
     }
