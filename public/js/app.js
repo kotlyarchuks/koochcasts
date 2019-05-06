@@ -1787,11 +1787,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      loading: false
     };
   },
   computed: {
@@ -1804,11 +1808,13 @@ __webpack_require__.r(__webpack_exports__);
       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
     },
     loginUser: function loginUser() {
+      this.loading = true;
       axios.post('/login', {
         email: this.email,
         password: this.password
       }).then(function (response) {
         document.location.reload();
+        this.loading = false;
       });
     }
   }
@@ -6273,7 +6279,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
 
 // module
-exports.push([module.i, "\n/****** LOGIN MODAL ******/\n.loginmodal-container {\n    padding: 30px;\n    max-width: 350px;\n    width: 100% !important;\n    background-color: #F7F7F7;\n    margin: 0 auto;\n    border-radius: 2px;\n    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);\n    overflow: hidden;\n    font-family: roboto, sans-serif;\n}\n.loginmodal-container h1 {\n    text-align: center;\n    font-size: 1.8em;\n    font-family: roboto, sans-serif;\n}\n.loginmodal-container input[type=submit] {\n    width: 100%;\n    display: block;\n    margin-bottom: 10px;\n    position: relative;\n}\n.loginmodal-container input[type=text], input[type=password] {\n    height: 44px;\n    font-size: 16px;\n    width: 100%;\n    margin-bottom: 10px;\n    -webkit-appearance: none;\n    background: #fff;\n    border: 1px solid #d9d9d9;\n    border-top: 1px solid #c0c0c0;\n    /* border-radius: 2px; */\n    padding: 0 8px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n}\n.loginmodal-container input[type=text]:hover, input[type=password]:hover {\n    border: 1px solid #b9b9b9;\n    border-top: 1px solid #a0a0a0;\n    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);\n}\n.loginmodal {\n    text-align: center;\n    font-size: 14px;\n    font-family: 'Arial', sans-serif;\n    font-weight: 700;\n    height: 36px;\n    padding: 0 8px;\n    /* border-radius: 3px; */\n    /* -webkit-user-select: none;\n      user-select: none; */\n}\n.loginmodal-submit {\n    /* border: 1px solid #3079ed; */\n    border: 0px;\n    color: #fff;\n    text-shadow: 0 1px rgba(0,0,0,0.1);\n    background-color: #4d90fe;\n    padding: 17px 0px;\n    font-family: roboto, sans-serif;\n    font-size: 14px;\n    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */\n}\n.loginmodal-submit:hover {\n    /* border: 1px solid #2f5bb7; */\n    border: 0px;\n    text-shadow: 0 1px rgba(0,0,0,0.3);\n    background-color: #357ae8;\n    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */\n}\n.loginmodal-container a {\n    text-decoration: none;\n    color: #666;\n    font-weight: 400;\n    text-align: center;\n    display: inline-block;\n    opacity: 0.6;\n    transition: opacity ease 0.5s;\n}\n.login-help{\n    font-size: 12px;\n}\n.login-btn {\n    text-align:center;\n    margin-top: 50px;\n}\n.button {\n    line-height: 55px;\n    padding: 0 30px;\n    background: #004a80;\n    color: #fff;\n    display: inline-block;\n    font-family: roboto, sans-serif;\n    text-decoration: none;\n    font-size: 18px;\n}\n.button:hover,\n.button:visited {\n    background: #006cba;\n    color: #fff;\n}\n", ""]);
+exports.push([module.i, "\n/****** LOGIN MODAL ******/\n.loginmodal-container {\n    padding: 30px;\n    max-width: 350px;\n    width: 100% !important;\n    background-color: #F7F7F7;\n    margin: 0 auto;\n    border-radius: 2px;\n    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);\n    overflow: hidden;\n    font-family: roboto, sans-serif;\n    position: relative;\n}\n.loginmodal-container h1 {\n    text-align: center;\n    font-size: 1.8em;\n    font-family: roboto, sans-serif;\n}\n.loginmodal-container input[type=submit] {\n    width: 100%;\n    display: block;\n    margin-bottom: 10px;\n    position: relative;\n}\n.loginmodal-container input[type=text], input[type=password] {\n    height: 44px;\n    font-size: 16px;\n    width: 100%;\n    margin-bottom: 10px;\n    -webkit-appearance: none;\n    background: #fff;\n    border: 1px solid #d9d9d9;\n    border-top: 1px solid #c0c0c0;\n    /* border-radius: 2px; */\n    padding: 0 8px;\n    box-sizing: border-box;\n    -moz-box-sizing: border-box;\n}\n.loginmodal-container input[type=text]:hover, input[type=password]:hover {\n    border: 1px solid #b9b9b9;\n    border-top: 1px solid #a0a0a0;\n    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);\n}\n.loginmodal {\n    text-align: center;\n    font-size: 14px;\n    font-family: 'Arial', sans-serif;\n    font-weight: 700;\n    height: 36px;\n    padding: 0 8px;\n    /* border-radius: 3px; */\n    /* -webkit-user-select: none;\n      user-select: none; */\n}\n.loginmodal-submit {\n    /* border: 1px solid #3079ed; */\n    border: 0px;\n    color: #fff;\n    text-shadow: 0 1px rgba(0,0,0,0.1);\n    background-color: #4d90fe;\n    padding: 17px 0px;\n    font-family: roboto, sans-serif;\n    font-size: 14px;\n    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */\n}\n.loginmodal-submit:hover {\n    /* border: 1px solid #2f5bb7; */\n    border: 0px;\n    text-shadow: 0 1px rgba(0,0,0,0.3);\n    background-color: #357ae8;\n    /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */\n}\n.loginmodal-container a {\n    text-decoration: none;\n    color: #666;\n    font-weight: 400;\n    text-align: center;\n    display: inline-block;\n    opacity: 0.6;\n    transition: opacity ease 0.5s;\n}\n.login-help{\n    font-size: 12px;\n}\n.login-btn {\n    text-align:center;\n    margin-top: 50px;\n}\n.button {\n    line-height: 55px;\n    padding: 0 30px;\n    background: #004a80;\n    color: #fff;\n    display: inline-block;\n    font-family: roboto, sans-serif;\n    text-decoration: none;\n    font-size: 18px;\n}\n.button:hover,\n.button:visited {\n    background: #006cba;\n    color: #fff;\n}\n.loader {\n    position: absolute;\n    top: 40%;\n    left: 40%;\n}\n.lds-roller {\n    display: inline-block;\n    position: relative;\n    width: 64px;\n    height: 64px;\n}\n.lds-roller div {\n    -webkit-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n            animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;\n    -webkit-transform-origin: 32px 32px;\n            transform-origin: 32px 32px;\n}\n.lds-roller div:after {\n    content: \" \";\n    display: block;\n    position: absolute;\n    width: 6px;\n    height: 6px;\n    border-radius: 50%;\n    background: red;\n    margin: -3px 0 0 -3px;\n}\n.lds-roller div:nth-child(1) {\n    -webkit-animation-delay: -0.036s;\n            animation-delay: -0.036s;\n}\n.lds-roller div:nth-child(1):after {\n    top: 50px;\n    left: 50px;\n}\n.lds-roller div:nth-child(2) {\n    -webkit-animation-delay: -0.072s;\n            animation-delay: -0.072s;\n}\n.lds-roller div:nth-child(2):after {\n    top: 54px;\n    left: 45px;\n}\n.lds-roller div:nth-child(3) {\n    -webkit-animation-delay: -0.108s;\n            animation-delay: -0.108s;\n}\n.lds-roller div:nth-child(3):after {\n    top: 57px;\n    left: 39px;\n}\n.lds-roller div:nth-child(4) {\n    -webkit-animation-delay: -0.144s;\n            animation-delay: -0.144s;\n}\n.lds-roller div:nth-child(4):after {\n    top: 58px;\n    left: 32px;\n}\n.lds-roller div:nth-child(5) {\n    -webkit-animation-delay: -0.18s;\n            animation-delay: -0.18s;\n}\n.lds-roller div:nth-child(5):after {\n    top: 57px;\n    left: 25px;\n}\n.lds-roller div:nth-child(6) {\n    -webkit-animation-delay: -0.216s;\n            animation-delay: -0.216s;\n}\n.lds-roller div:nth-child(6):after {\n    top: 54px;\n    left: 19px;\n}\n.lds-roller div:nth-child(7) {\n    -webkit-animation-delay: -0.252s;\n            animation-delay: -0.252s;\n}\n.lds-roller div:nth-child(7):after {\n    top: 50px;\n    left: 14px;\n}\n.lds-roller div:nth-child(8) {\n    -webkit-animation-delay: -0.288s;\n            animation-delay: -0.288s;\n}\n.lds-roller div:nth-child(8):after {\n    top: 45px;\n    left: 10px;\n}\n@-webkit-keyframes lds-roller {\n0% {\n        -webkit-transform: rotate(0deg);\n                transform: rotate(0deg);\n}\n100% {\n        -webkit-transform: rotate(360deg);\n                transform: rotate(360deg);\n}\n}\n@keyframes lds-roller {\n0% {\n        -webkit-transform: rotate(0deg);\n                transform: rotate(0deg);\n}\n100% {\n        -webkit-transform: rotate(360deg);\n                transform: rotate(360deg);\n}\n}\n", ""]);
 
 // exports
 
@@ -37779,6 +37785,10 @@ var render = function() {
           _c("h1", [_vm._v("Login to Your Account")]),
           _c("br"),
           _vm._v(" "),
+          _vm.loading
+            ? _c("div", { staticClass: "loader" }, [_vm._m(0)])
+            : _vm._e(),
+          _vm._v(" "),
           _c("form", [
             _c("input", {
               directives: [
@@ -37849,13 +37859,28 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _vm._m(1)
         ])
       ])
     ]
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "lds-roller" }, [
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div"),
+      _c("div")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
