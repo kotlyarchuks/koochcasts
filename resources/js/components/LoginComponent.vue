@@ -53,8 +53,10 @@
                     email: this.email,
                     password: this.password
                 })
-                    .then(function(response){
+                    .then(resp=>{
                         document.location.reload()
+                    })
+                    .catch(error=>{
                         this.loading = false
                     })
             }
@@ -185,8 +187,12 @@
 
     .loader {
         position: absolute;
-        top: 40%;
-        left: 40%;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: #EEE;
+        opacity: 0.2;
     }
 
     .lds-roller {
@@ -194,6 +200,8 @@
         position: relative;
         width: 64px;
         height: 64px;
+        top: 40%;
+        left: 40%;
     }
     .lds-roller div {
         animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
