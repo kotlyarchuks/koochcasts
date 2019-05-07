@@ -52,6 +52,7 @@
             },
 
             loginUser(){
+                this.errors = [];
                 this.loading = true;
                 axios.post('/login', {
                     email: this.email,

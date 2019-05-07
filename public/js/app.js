@@ -1814,6 +1814,7 @@ __webpack_require__.r(__webpack_exports__);
     loginUser: function loginUser() {
       var _this = this;
 
+      this.errors = [];
       this.loading = true;
       axios.post('/login', {
         email: this.email,
