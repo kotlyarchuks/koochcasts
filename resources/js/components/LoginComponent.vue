@@ -7,8 +7,8 @@
                     <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 </div>
                 <form>
-                    <div class="alert alert-danger" role="alert" v-if="hasErrors">
-                        Invalid email or password!
+                    <div class="alert alert-danger" role="alert" v-if="errors.length">
+                        <div v-for="error in errors">{{error}}</div>
                     </div>
                     <input class="form-control" type="text" name="user" placeholder="Username" v-model="email">
                     <input class="form-control" type="password" name="pass" placeholder="Password" v-model="password">
@@ -35,7 +35,7 @@
                 email: '',
                 password: '',
                 loading: false,
-                hasErrors: false
+                errors: [],
             }
         },
 
@@ -62,7 +62,9 @@
                     })
                     .catch(error=> {
                         if (error.response.status == 422){
-                            this.hasErrors = true
+                            this.errors.push('Invalid email or password!')
+                        } else {
+                            this.errors.push('Something went wrong')
                         }
                         this.loading = false
                     })

@@ -1799,7 +1799,7 @@ __webpack_require__.r(__webpack_exports__);
       email: '',
       password: '',
       loading: false,
-      hasErrors: false
+      errors: []
     };
   },
   computed: {
@@ -1822,7 +1822,9 @@ __webpack_require__.r(__webpack_exports__);
         document.location.reload();
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this.hasErrors = true;
+          _this.errors.push('Invalid email or password!');
+        } else {
+          _this.errors.push('Something went wrong');
         }
 
         _this.loading = false;
@@ -37801,18 +37803,17 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("form", [
-            _vm.hasErrors
+            _vm.errors.length
               ? _c(
                   "div",
                   {
                     staticClass: "alert alert-danger",
                     attrs: { role: "alert" }
                   },
-                  [
-                    _vm._v(
-                      "\n                    Invalid email or password!\n                "
-                    )
-                  ]
+                  _vm._l(_vm.errors, function(error) {
+                    return _c("div", [_vm._v(_vm._s(error))])
+                  }),
+                  0
                 )
               : _vm._e(),
             _vm._v(" "),
