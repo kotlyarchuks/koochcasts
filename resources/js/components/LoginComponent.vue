@@ -1,5 +1,9 @@
 <template>
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel"
+         aria-hidden="true"
+         style="display: none;"
+        ref="vuemodal">
         <div class="modal-dialog">
             <div class="loginmodal-container">
                 <h1>Login to Your Account</h1><br>
@@ -51,6 +55,10 @@
                 return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
             },
 
+            onClose(){
+              this.errors = [];
+            },
+
             loginUser(){
                 this.errors = [];
                 this.loading = true;
@@ -70,6 +78,10 @@
                         this.loading = false
                     })
             }
+        },
+
+        mounted(){
+            $(this.$refs.vuemodal).on("hidden.bs.modal", this.onClose)
         }
     }
 </script>

@@ -1793,6 +1793,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1810,6 +1814,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     isEmailValid: function isEmailValid() {
       return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email);
+    },
+    onClose: function onClose() {
+      this.errors = [];
     },
     loginUser: function loginUser() {
       var _this = this;
@@ -1831,6 +1838,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.loading = false;
       });
     }
+  },
+  mounted: function mounted() {
+    $(this.$refs.vuemodal).on("hidden.bs.modal", this.onClose);
   }
 });
 
@@ -37783,6 +37793,7 @@ var render = function() {
   return _c(
     "div",
     {
+      ref: "vuemodal",
       staticClass: "modal fade",
       staticStyle: { display: "none" },
       attrs: {
