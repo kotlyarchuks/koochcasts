@@ -1790,12 +1790,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       email: '',
       password: '',
-      loading: false
+      loading: false,
+      hasErrors: false
     };
   },
   computed: {
@@ -1817,6 +1821,10 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (resp) {
         document.location.reload();
       })["catch"](function (error) {
+        if (error.response.status == 422) {
+          _this.hasErrors = true;
+        }
+
         _this.loading = false;
       });
     }
@@ -37793,6 +37801,21 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("form", [
+            _vm.hasErrors
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "alert alert-danger",
+                    attrs: { role: "alert" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    Invalid email or password!\n                "
+                    )
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
             _c("input", {
               directives: [
                 {

@@ -7,6 +7,9 @@
                     <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 </div>
                 <form>
+                    <div class="alert alert-danger" role="alert" v-if="hasErrors">
+                        Invalid email or password!
+                    </div>
                     <input class="form-control" type="text" name="user" placeholder="Username" v-model="email">
                     <input class="form-control" type="password" name="pass" placeholder="Password" v-model="password">
                     <button type="submit" name="login" value="Login"
@@ -31,7 +34,8 @@
             return {
                 email: '',
                 password: '',
-                loading: false
+                loading: false,
+                hasErrors: false
             }
         },
 
@@ -48,15 +52,18 @@
             },
 
             loginUser(){
-                this.loading = true
+                this.loading = true;
                 axios.post('/login', {
                     email: this.email,
                     password: this.password
                 })
-                    .then(resp=>{
+                    .then(resp=> {
                         document.location.reload()
                     })
-                    .catch(error=>{
+                    .catch(error=> {
+                        if (error.response.status == 422){
+                            this.hasErrors = true
+                        }
                         this.loading = false
                     })
             }
